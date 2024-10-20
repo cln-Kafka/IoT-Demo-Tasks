@@ -32,11 +32,17 @@ int LEDG = LOW;
 int counter = 0;
 
 void setup() {
+  Serial.begin(115200);  // Start serial communication for debugging
+
   WiFi.mode(WIFI_AP);  // Wi-Fi AP mode
   delay(1000);         // setup AP mode
 
   WiFi.softAP(ssidAP, passwordAP);               // initialise Wi-Fi with
   WiFi.softAPConfig(local_ip, gateway, subnet);  // predefined IP address
+
+  IPAddress IP = WiFi.softAPIP();
+  Serial.print("AP IP Address: ");
+  Serial.println(IP);
 
   server.begin();  // initialise server
 
@@ -59,6 +65,14 @@ void LEDGfunct() {
   /* function to change green LED state, increment counter, and send HTML code to client*/
   LEDG = !LEDG;
   digitalWrite(LEDGpin, LEDG);
+  counter++;
+  server.send(200, "text/html", webcode(LEDG, LEDR, counter));
+}
+
+void LEDRfunct() {
+  /* function to change green LED state, increment counter, and send HTML code to client*/
+  LEDR = !LEDR;
+  digitalWrite(LEDRpin, LEDR);
   counter++;
   server.send(200, "text/html", webcode(LEDG, LEDR, counter));
 }
