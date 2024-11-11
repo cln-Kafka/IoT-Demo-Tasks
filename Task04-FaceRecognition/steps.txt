@@ -1,0 +1,11 @@
+1) for each of those repos
+https://github.com/me-no-dev/ESPAsyncWebServer
+https://github.com/me-no-dev/AsyncTCP
+
+Download the repository as a ZIP file by clicking on Code > Download ZIP.
+
+2) Extract the ZIP file.
+3) Copy the extracted folder into your Arduino libraries folder. 
+(ofen found in Documents/Arduino/libraries)
+4) restart the IDE
+5) upload the code to the board 
