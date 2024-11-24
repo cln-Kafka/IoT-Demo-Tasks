@@ -5,8 +5,8 @@
 #include <esp_camera.h>
 
 char auth[] = "YOUR_BLYNK_AUTH_TOKEN";  // Blynk Auth Token
-char ssid[] = "YOUR_WIFI_SSID";         // WiFi SSID
-char pass[] = "YOUR_WIFI_PASSWORD";     // WiFi Password
+char ssid[] = "ESP32-CAM-Network";     // Name of your local network (Access Point)
+char pass[] = "123456789";              // Password for your local network
 
 ESP32WebServer server(80);
 
@@ -38,13 +38,10 @@ void startCameraServer() {
 void setup() {
   Serial.begin(115200);
 
-  // Connect to Wi-Fi
-  WiFi.begin(ssid, pass);
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(1000);
-    Serial.println("Connecting to WiFi...");
-  }
-  Serial.println("Connected to WiFi");
+  // Start ESP32 as an Access Point
+  WiFi.softAP(ssid, pass);
+  Serial.print("Access Point IP: ");
+  Serial.println(WiFi.softAPIP());
 
   Blynk.begin(auth, ssid, pass);
 
