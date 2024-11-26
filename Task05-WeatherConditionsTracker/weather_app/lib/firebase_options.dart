@@ -41,52 +41,52 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAP9JRjWTes6W5U8vaqijWR4zyKiN7ZQzo',
-    appId: '1:736469950577:web:031acfc06f4c5d59b6fbd0',
-    messagingSenderId: '736469950577',
-    projectId: 'smart-home-demo-20c25',
-    authDomain: 'smart-home-demo-20c25.firebaseapp.com',
-    databaseURL: 'https://smart-home-demo-20c25-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'smart-home-demo-20c25.firebasestorage.app',
+    apiKey: 'AIzaSyAMhw3n-MuDxdtGPO5s1jg_1nn4HNqdjLo',
+    appId: '1:160207124436:web:430f3ebf3435354f240841',
+    messagingSenderId: '160207124436',
+    projectId: 'dht11-firebase-92fe9',
+    authDomain: 'dht11-firebase-92fe9.firebaseapp.com',
+    databaseURL: 'https://dht11-firebase-92fe9-default-rtdb.europe-west1.firebasedatabase.app',
+    storageBucket: 'dht11-firebase-92fe9.firebasestorage.app',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBDRThi3MpfcA2cZbDhhYFknS8eHIvV558',
-    appId: '1:736469950577:android:e2061577a9876c54b6fbd0',
-    messagingSenderId: '736469950577',
-    projectId: 'smart-home-demo-20c25',
-    databaseURL: 'https://smart-home-demo-20c25-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'smart-home-demo-20c25.firebasestorage.app',
+    apiKey: 'AIzaSyD7F3-_PYON5bG1nycXdyM0DgcAVb4A8h4',
+    appId: '1:160207124436:android:aa4ea682cfe0e35a240841',
+    messagingSenderId: '160207124436',
+    projectId: 'dht11-firebase-92fe9',
+    databaseURL: 'https://dht11-firebase-92fe9-default-rtdb.europe-west1.firebasedatabase.app',
+    storageBucket: 'dht11-firebase-92fe9.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCdyAnQ5Qfy6_b-3_inguY56mxMywjP3hQ',
-    appId: '1:736469950577:ios:9e3cd5f08c20728ab6fbd0',
-    messagingSenderId: '736469950577',
-    projectId: 'smart-home-demo-20c25',
-    databaseURL: 'https://smart-home-demo-20c25-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'smart-home-demo-20c25.firebasestorage.app',
+    apiKey: 'AIzaSyCNvTGwxfKS4Yg6NB57GwA0m_aFTxPiTVw',
+    appId: '1:160207124436:ios:4143f8f47a70411a240841',
+    messagingSenderId: '160207124436',
+    projectId: 'dht11-firebase-92fe9',
+    databaseURL: 'https://dht11-firebase-92fe9-default-rtdb.europe-west1.firebasedatabase.app',
+    storageBucket: 'dht11-firebase-92fe9.firebasestorage.app',
     iosBundleId: 'com.example.weatherApp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCdyAnQ5Qfy6_b-3_inguY56mxMywjP3hQ',
-    appId: '1:736469950577:ios:9e3cd5f08c20728ab6fbd0',
-    messagingSenderId: '736469950577',
-    projectId: 'smart-home-demo-20c25',
-    databaseURL: 'https://smart-home-demo-20c25-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'smart-home-demo-20c25.firebasestorage.app',
+    apiKey: 'AIzaSyCNvTGwxfKS4Yg6NB57GwA0m_aFTxPiTVw',
+    appId: '1:160207124436:ios:4143f8f47a70411a240841',
+    messagingSenderId: '160207124436',
+    projectId: 'dht11-firebase-92fe9',
+    databaseURL: 'https://dht11-firebase-92fe9-default-rtdb.europe-west1.firebasedatabase.app',
+    storageBucket: 'dht11-firebase-92fe9.firebasestorage.app',
     iosBundleId: 'com.example.weatherApp',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyAP9JRjWTes6W5U8vaqijWR4zyKiN7ZQzo',
-    appId: '1:736469950577:web:2ac6c6af44e529a8b6fbd0',
-    messagingSenderId: '736469950577',
-    projectId: 'smart-home-demo-20c25',
-    authDomain: 'smart-home-demo-20c25.firebaseapp.com',
-    databaseURL: 'https://smart-home-demo-20c25-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'smart-home-demo-20c25.firebasestorage.app',
+    apiKey: 'AIzaSyAMhw3n-MuDxdtGPO5s1jg_1nn4HNqdjLo',
+    appId: '1:160207124436:web:174d41e79cfd7bac240841',
+    messagingSenderId: '160207124436',
+    projectId: 'dht11-firebase-92fe9',
+    authDomain: 'dht11-firebase-92fe9.firebaseapp.com',
+    databaseURL: 'https://dht11-firebase-92fe9-default-rtdb.europe-west1.firebasedatabase.app',
+    storageBucket: 'dht11-firebase-92fe9.firebasestorage.app',
   );
 
 }

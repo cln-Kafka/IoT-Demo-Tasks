@@ -43,12 +43,11 @@ class _MyAppState extends State<MyApp> {
   dynamic temperature;
   String time = "8:47";
   String date = "25/11/2024";
-  String ledState = "On";
-  DatabaseReference ledRef = FirebaseDatabase.instance.ref().child('led_state');
-  DatabaseReference tempRef =
-      FirebaseDatabase.instance.ref().child('temperature');
+  bool ledState = true;
+  DatabaseReference ledRef = FirebaseDatabase.instance.ref().child('LED_State');
+  DatabaseReference tempRef = FirebaseDatabase.instance.ref().child('Temp');
   DatabaseReference humidityRef =
-      FirebaseDatabase.instance.ref().child('humidity');
+      FirebaseDatabase.instance.ref().child('Humidity');
 
   @override
   void initState() {
@@ -69,9 +68,9 @@ class _MyAppState extends State<MyApp> {
   }
 
   void _toggleLED() async {
-    ledState = ledState == "On" ? "Off" : "On";
-    await ledRef.set(ledState);
+    ledState = ledState == true ? false : true;
     setState(() {});
+    await ledRef.set(ledState);
   }
 
   void _toggleTheme() {

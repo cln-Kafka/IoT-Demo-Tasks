@@ -1,14 +1,14 @@
 {
   "project_info": {
-    "project_number": "736469950577",
-    "firebase_url": "https://smart-home-demo-20c25-default-rtdb.europe-west1.firebasedatabase.app",
-    "project_id": "smart-home-demo-20c25",
-    "storage_bucket": "smart-home-demo-20c25.firebasestorage.app"
+    "project_number": "160207124436",
+    "firebase_url": "https://dht11-firebase-92fe9-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "dht11-firebase-92fe9",
+    "storage_bucket": "dht11-firebase-92fe9.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:736469950577:android:e2061577a9876c54b6fbd0",
+        "mobilesdk_app_id": "1:160207124436:android:aa4ea682cfe0e35a240841",
         "android_client_info": {
           "package_name": "com.example.weather_app"
         }
@@ -16,7 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBDRThi3MpfcA2cZbDhhYFknS8eHIvV558"
+          "current_key": "AIzaSyD7F3-_PYON5bG1nycXdyM0DgcAVb4A8h4"
         }
       ],
       "services": {
