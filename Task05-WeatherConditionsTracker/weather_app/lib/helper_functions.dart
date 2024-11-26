@@ -10,3 +10,20 @@ Widget buildStyledText(String text) {
     ),
   );
 }
+
+Widget showLoadingIndicator(message) {
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      const CircularProgressIndicator(
+        color: Colors.white,
+      ),
+      const SizedBox(height: 16),
+      Text(
+        message,
+        style: const TextStyle(
+            color: Colors.white, fontSize: 18, fontWeight: FontWeight.w700),
+      ),
+    ],
+  );
+}

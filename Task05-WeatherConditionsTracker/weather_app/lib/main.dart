@@ -7,9 +7,6 @@ import 'package:weather_app/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
   runApp(const WeatherTracker());
 }
 
@@ -37,34 +34,40 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String currentImage = dayImage;
-
   Color buttonColor = dayButtonColor;
   dynamic humidity;
   dynamic temperature;
-  String time = "8:47";
-  String date = "25/11/2024";
+  String time = "";
+  String date = "";
   bool ledState = true;
-  DatabaseReference ledRef = FirebaseDatabase.instance.ref().child('LED_State');
-  DatabaseReference tempRef = FirebaseDatabase.instance.ref().child('Temp');
-  DatabaseReference humidityRef =
-      FirebaseDatabase.instance.ref().child('Humidity');
-
+  late DatabaseReference ledRef;
+  late DatabaseReference tempRef;
+  late DatabaseReference humidityRef;
+  Future<FirebaseApp> firebase = Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   @override
   void initState() {
     super.initState();
-    {
-      tempRef.onValue.listen((DatabaseEvent event) {
-        updateTimeAndDate();
-        temperature = event.snapshot.value;
-        setState(() {});
-      });
+    updateTimeAndDate();
+  }
 
-      humidityRef.onValue.listen((DatabaseEvent event) {
-        updateTimeAndDate();
-        humidity = event.snapshot.value;
-        setState(() {});
-      });
-    }
+  void initializeRealtimeListeners() {
+    ledRef = FirebaseDatabase.instance.ref().child('LED_State');
+    tempRef = FirebaseDatabase.instance.ref().child('Temp');
+    humidityRef = FirebaseDatabase.instance.ref().child('Humidity');
+
+    tempRef.onValue.listen((DatabaseEvent event) {
+      updateTimeAndDate();
+      temperature = event.snapshot.value;
+      setState(() {});
+    });
+
+    humidityRef.onValue.listen((DatabaseEvent event) {
+      updateTimeAndDate();
+      humidity = event.snapshot.value;
+      setState(() {});
+    });
   }
 
   void _toggleLED() async {
@@ -89,8 +92,8 @@ class _MyAppState extends State<MyApp> {
     final now = DateTime.now();
     date = "${now.day}/${now.month}/${now.year}";
     time = "${now.hour}:${now.minute.toString().padLeft(2, '0')}";
-    if ((now.hour >= 18 && currentImage != nightImage) ||
-        (now.hour < 18 && currentImage != dayImage)) {
+    if (((now.hour >= 18 || now.hour < 6) && currentImage != nightImage) ||
+        ((now.hour < 18 && now.hour > 6) && currentImage != dayImage)) {
       _toggleTheme();
     }
   }
@@ -106,67 +109,84 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
         child: Center(
-            child: Padding(
-                padding: const EdgeInsets.only(left: 16, right: 16, top: 210),
-                child: Column(
-                  children: [
-                    Text(
-                      "$temperature°",
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 90,
-                        fontWeight: FontWeight.w300,
-                      ),
-                    ),
-                    const Text(
-                      "Cairo, Egypt",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(top: 24),
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                          color: Colors.blue.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          buildStyledText("Date: $date"),
-                          const SizedBox(height: 8),
-                          buildStyledText("Time: $time"),
-                          const SizedBox(height: 8),
-                          buildStyledText("Humidity: $humidity%"),
-                          const SizedBox(height: 8),
-                          buildStyledText("LED state: $ledState"),
-                          const SizedBox(
-                            height: 24,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              ElevatedButton(
-                                onPressed: _toggleLED,
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: buttonColor,
-                                  foregroundColor: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
+            child: FutureBuilder(
+                future: firebase,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    initializeRealtimeListeners();
+                    if (temperature != null) {
+                      return Padding(
+                        padding: const EdgeInsets.only(
+                            left: 16, right: 16, top: 210),
+                        child: Column(
+                          children: [
+                            Text(
+                              "$temperature°",
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 90,
+                                fontWeight: FontWeight.w300,
+                              ),
+                            ),
+                            const Text(
+                              "Cairo, Egypt",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(top: 24),
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(16),
+                              decoration: BoxDecoration(
+                                  color: Colors.blue.withOpacity(0.2),
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  buildStyledText("Date: $date"),
+                                  const SizedBox(height: 8),
+                                  buildStyledText("Time: $time"),
+                                  const SizedBox(height: 8),
+                                  buildStyledText("Humidity: $humidity%"),
+                                  const SizedBox(height: 8),
+                                  buildStyledText("LED state: $ledState"),
+                                  const SizedBox(
+                                    height: 24,
                                   ),
-                                ),
-                                child: const Text("Toggle LED"),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ))),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      ElevatedButton(
+                                        onPressed: _toggleLED,
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: buttonColor,
+                                          foregroundColor: Colors.white,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                          ),
+                                        ),
+                                        child: const Text("Toggle LED"),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    } else {
+                      return showLoadingIndicator("Poor Internet Connection!");
+                    }
+                  } else {
+                    return showLoadingIndicator(
+                        "Something wrong with firebase, please hold on");
+                  }
+                })),
       ),
     );
   }
